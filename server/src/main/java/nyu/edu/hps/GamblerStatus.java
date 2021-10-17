@@ -94,6 +94,6 @@ public class GamblerStatus {
         this.start = status.isStart();
         this.totalSlot = status.getTotalSlot();
         this.normalSlotRate = status.getNormalSlotRate();
-        this.winningSlotRate = status.getNormalSlotRate();
+        this.winningSlotRate = status.getWinningSlotRate();
     }
 }

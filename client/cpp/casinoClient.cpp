@@ -50,7 +50,7 @@ int main() {
     while(!isStart){
         getStatus();
     }
-
+    
     while(!gameOver){
         if(casinoTurn){
             //TODO: change the strategy
