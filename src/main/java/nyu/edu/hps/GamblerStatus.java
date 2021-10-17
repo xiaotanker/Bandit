@@ -3,6 +3,7 @@ package nyu.edu.hps;
 import org.springframework.beans.factory.annotation.Value;
 
 public class GamblerStatus {
+    private boolean gameOver;
     private boolean start;
     private boolean gamblerTurn;
     private int deposit;
@@ -10,6 +11,14 @@ public class GamblerStatus {
     private int currentRound;
     private int totalSlot;
     private int switchLeft;//k
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
 
     public boolean isStart() {
         return start;
@@ -68,6 +77,7 @@ public class GamblerStatus {
     }
 
     public GamblerStatus(GameStatus status){
+        this.gameOver = status.isGameOver();
         this.currentRound = status.getCurrentRound();
         this.currentSlot = status.getCurrentSlot();
         this.deposit= status.getDeposit();

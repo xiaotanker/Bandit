@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 @Component
 @ConfigurationProperties("bandit")
 public class GameStatus {
+    private boolean gameOver = false;
     private boolean start = false;
     private boolean casinoTurn = true;
     private int deposit;
@@ -23,6 +24,14 @@ public class GameStatus {
 
     private int normalSlotRate;
     private int winningSlotRate;
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
 
     public boolean isStart() {
         return start;

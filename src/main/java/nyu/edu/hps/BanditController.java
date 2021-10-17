@@ -31,7 +31,9 @@ public class BanditController {
         } else {
             return ResponseEntity.status(403).body("already has a casino, can't join as casino\n");
         }
+        logger.info("casino joined, name: "+ name);
         if (casino != null && gambler != null) {
+            logger.info("game start, waiting for casino send move");
             status.setCasinoTurn(true);
             status.setStart(true);
         }
@@ -46,11 +48,14 @@ public class BanditController {
         } else {
             return ResponseEntity.status(403).body("already has a gambler, can't join as gambler\n");
         }
+        logger.info("gambler joined, name: "+ name);
+
         if (casino != null && gambler != null) {
+            logger.info("game start, waiting for casino send move");
             status.setCasinoTurn(true);
             status.setStart(true);
         }
-        return ResponseEntity.status(200).body(pwdCasino);
+        return ResponseEntity.status(200).body(pwdGambler);
     }
 
     @GetMapping("/casino/status")
@@ -85,18 +90,21 @@ public class BanditController {
         }
 
         if (status.getCurrentRound() == 1) {
+            logger.info("winning slot is now slot #"+winningSlot);
             status.setWinningSlot(winningSlot);
         } else {
             if (winningSlot != status.getWinningSlot()) {
                 if (status.getSwitchLeft() > 0) {
                     status.setWinningSlot(winningSlot);
                     status.setSwitchLeft(status.getSwitchLeft() - 1);
+                    logger.info("winning slot is now slot #"+winningSlot);
                 } else {
                     return ResponseEntity.status(403).body(null);
                 }
             }
         }
         status.setCasinoTurn(false);
+        logger.info("waiting for gambler to send move");
         return ResponseEntity.status(200).body(status);
     }
 
@@ -105,10 +113,10 @@ public class BanditController {
         if (!status.isStart()) {
             return ResponseEntity.status(403).body(null);
         }
-        if (!pwd.equals(pwdCasino)) {
+        if (!pwd.equals(pwdGambler)) {
             return ResponseEntity.status(401).body(null);
         }
-        if (!status.isCasinoTurn()) {
+        if (status.isCasinoTurn()) {
             return ResponseEntity.status(401).body(null);
         }
         if (slot > status.getTotalSlot() ) {
@@ -117,6 +125,7 @@ public class BanditController {
         if (bet < 1 || bet > 3){//must bet 1 to 3
             return ResponseEntity.status(403).body(null);
         }
+        logger.info("gambler chooses slot # "+ slot + "and bets "+ bet+" dollar(s)");
         status.setCurrentSlot(slot);
 
         status.setDeposit(status.getDeposit() - bet);
@@ -132,11 +141,18 @@ public class BanditController {
         }
         if(win){
             status.setDeposit(status.getDeposit()+ bet*2);
+            logger.info("gambler wins, deposit is now " + status.getDeposit());
         }
         status.setCurrentRound(status.getCurrentRound() + 1);
         status.setCasinoTurn(true);
-        if(status.getDeposit()<=0||status.getCurrentRound()>status.getTotalSlot() * 100){
+        if(status.getDeposit()<=0){
+            logger.info("deposit is now 0, game over");
             status.setStart(false);
+        }
+        if(status.getCurrentRound()>status.getTotalSlot() * 100){
+            logger.info("all rounds finished, game over");
+            status.setStart(false);
+
         }
         return ResponseEntity.status(200).body(new GamblerStatus(status));
     }
