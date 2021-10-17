@@ -8,7 +8,37 @@ public class GamblerStatus {
     private int currentSlot;
     private int currentRound;
     private int totalSlot;//s
-    private int switchLeft;//k
+
+    private int normalSlotRate;
+    private int winningSlotRate;
+
+    public GamblerStatus(boolean gameOver, boolean start, boolean gamblerTurn, int deposit, int currentSlot, int currentRound, int totalSlot, int normalSlotRate, int winningSlotRate) {
+        this.gameOver = gameOver;
+        this.start = start;
+        this.gamblerTurn = gamblerTurn;
+        this.deposit = deposit;
+        this.currentSlot = currentSlot;
+        this.currentRound = currentRound;
+        this.totalSlot = totalSlot;
+        this.normalSlotRate = normalSlotRate;
+        this.winningSlotRate = winningSlotRate;
+    }
+
+    public int getNormalSlotRate() {
+        return normalSlotRate;
+    }
+
+    public void setNormalSlotRate(int normalSlotRate) {
+        this.normalSlotRate = normalSlotRate;
+    }
+
+    public int getWinningSlotRate() {
+        return winningSlotRate;
+    }
+
+    public void setWinningSlotRate(int winningSlotRate) {
+        this.winningSlotRate = winningSlotRate;
+    }
 
     public boolean isGameOver() {
         return gameOver;
@@ -66,22 +96,6 @@ public class GamblerStatus {
         this.totalSlot = totalSlot;
     }
 
-    public int getSwitchLeft() {
-        return switchLeft;
-    }
 
-    public void setSwitchLeft(int switchLeft) {
-        this.switchLeft = switchLeft;
-    }
 
-    public GamblerStatus(boolean gameOver, boolean start, boolean gamblerTurn, int deposit, int currentSlot, int currentRound, int totalSlot, int switchLeft) {
-        this.gameOver = gameOver;
-        this.start = start;
-        this.gamblerTurn = gamblerTurn;
-        this.deposit = deposit;
-        this.currentSlot = currentSlot;
-        this.currentRound = currentRound;
-        this.totalSlot = totalSlot;
-        this.switchLeft = switchLeft;
-    }
 }

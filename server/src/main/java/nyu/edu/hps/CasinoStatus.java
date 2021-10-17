@@ -1,4 +1,4 @@
-package edu.nyu.hps.bandit.client;
+package nyu.edu.hps;
 
 public class CasinoStatus {
     private boolean gameOver ;
@@ -16,29 +16,18 @@ public class CasinoStatus {
 
     private int normalSlotRate;
     private int winningSlotRate;
-
-    public CasinoStatus(boolean gameOver, boolean start, boolean casinoTurn, int deposit, int currentRound, int totalSlot, int switchLeft, boolean changedSlot, int winningSlot, int normalSlotRate, int winningSlotRate) {
-        this.gameOver = gameOver;
-        this.start = start;
-        this.casinoTurn = casinoTurn;
-        this.deposit = deposit;
-        this.currentRound = currentRound;
-        this.totalSlot = totalSlot;
-        this.switchLeft = switchLeft;
-        this.changedSlot = changedSlot;
-        this.winningSlot = winningSlot;
-        this.normalSlotRate = normalSlotRate;
-        this.winningSlotRate = winningSlotRate;
+    public CasinoStatus(GameStatus status){
+        this.gameOver = status.isGameOver();
+        this.start = status.isStart();
+        this.casinoTurn = status.isCasinoTurn();
+        this.deposit = status.getDeposit();
+        this.totalSlot = status.getTotalSlot();
+        this.switchLeft = status.getSwitchLeft();
+        this.changedSlot = status.isChangedSlot();
+        this.winningSlot = status.getWinningSlot();
+        this.normalSlotRate = status.getNormalSlotRate();
+        this.winningSlotRate = status.getWinningSlotRate();
     }
-
-    public boolean isChangedSlot() {
-        return changedSlot;
-    }
-
-    public void setChangedSlot(boolean changedSlot) {
-        this.changedSlot = changedSlot;
-    }
-
     public boolean isGameOver() {
         return gameOver;
     }
@@ -49,31 +38,6 @@ public class CasinoStatus {
 
     public boolean isStart() {
         return start;
-    }
-
-    public int getNormalSlotRate() {
-        return normalSlotRate;
-    }
-
-    public void setNormalSlotRate(int normalSlotRate) {
-        this.normalSlotRate = normalSlotRate;
-    }
-
-    public int getWinningSlotRate() {
-        return winningSlotRate;
-    }
-
-    public void setWinningSlotRate(int winningSlotRate) {
-        this.winningSlotRate = winningSlotRate;
-    }
-
-
-    public int getWinningSlot() {
-        return winningSlot;
-    }
-
-    public void setWinningSlot(int winningSlot) {
-        this.winningSlot = winningSlot;
     }
 
     public void setStart(boolean start) {
@@ -120,5 +84,36 @@ public class CasinoStatus {
         this.switchLeft = switchLeft;
     }
 
+    public boolean isChangedSlot() {
+        return changedSlot;
+    }
+
+    public void setChangedSlot(boolean changedSlot) {
+        this.changedSlot = changedSlot;
+    }
+
+    public int getWinningSlot() {
+        return winningSlot;
+    }
+
+    public void setWinningSlot(int winningSlot) {
+        this.winningSlot = winningSlot;
+    }
+
+    public int getNormalSlotRate() {
+        return normalSlotRate;
+    }
+
+    public void setNormalSlotRate(int normalSlotRate) {
+        this.normalSlotRate = normalSlotRate;
+    }
+
+    public int getWinningSlotRate() {
+        return winningSlotRate;
+    }
+
+    public void setWinningSlotRate(int winningSlotRate) {
+        this.winningSlotRate = winningSlotRate;
+    }
 
 }

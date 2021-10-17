@@ -21,9 +21,17 @@ public class GameStatus {
 
     private int currentSlot;
     private int winningSlot;
-
+    private boolean changedSlot;
     private int normalSlotRate;
     private int winningSlotRate;
+
+    public boolean isChangedSlot() {
+        return changedSlot;
+    }
+
+    public void setChangedSlot(boolean changedSlot) {
+        this.changedSlot = changedSlot;
+    }
 
     public boolean isGameOver() {
         return gameOver;

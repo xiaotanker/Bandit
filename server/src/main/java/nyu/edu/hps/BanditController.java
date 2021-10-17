@@ -59,23 +59,25 @@ public class BanditController {
     }
 
     @GetMapping("/casino/status")
-    public ResponseEntity<GameStatus> getCasinoStatus(@RequestParam(value = "pwd") String pwd) {
+    public ResponseEntity<CasinoStatus> getCasinoStatus(@RequestParam(value = "pwd") String pwd) {
         if (!pwd.equals(pwdCasino)) {
+            logger.error("wrong pwd for casino");
             return ResponseEntity.status(401).body(null);
         }
-        return ResponseEntity.status(200).body(status);
+        return ResponseEntity.status(200).body(new CasinoStatus(status));
     }
 
     @GetMapping("/gambler/status")
     public ResponseEntity<GamblerStatus> getGamblerStatus(@RequestParam(value = "pwd") String pwd) {
         if (!pwd.equals(pwdGambler)) {
+            logger.error("wrong pwd for gambler");
             return ResponseEntity.status(401).body(null);
         }
         return ResponseEntity.status(200).body(new GamblerStatus(status));
     }
 
     @PostMapping("/casino/sendMove")
-    public ResponseEntity<GameStatus> casinoSendMove(@RequestParam(value = "pwd") String pwd, @RequestParam(value = "winningSlot") int winningSlot) {
+    public ResponseEntity<CasinoStatus> casinoSendMove(@RequestParam(value = "pwd") String pwd, @RequestParam(value = "winningSlot") int winningSlot) {
         if (!status.isStart()) {
             logger.error("wrongly send move by casino, game is not started yet ");
             return ResponseEntity.status(403).body(null);
@@ -104,13 +106,13 @@ public class BanditController {
                     logger.info("winning slot is now slot #"+winningSlot);
                 } else {
                     logger.error("wrongly send move by casino, run out of switch times");
-                    return ResponseEntity.status(403).body(status);
+                    return ResponseEntity.status(403).body(new CasinoStatus(status));
                 }
             }
         }
         status.setCasinoTurn(false);
         logger.info("waiting for gambler to send move");
-        return ResponseEntity.status(200).body(status);
+        return ResponseEntity.status(200).body(new CasinoStatus(status));
     }
 
     @PostMapping("/gambler/sendMove")
@@ -136,6 +138,7 @@ public class BanditController {
             return ResponseEntity.status(403).body(null);
         }
         logger.info("gambler chooses slot # "+ slot + "and bets "+ bet+" dollar(s)");
+        status.setChangedSlot(slot == status.getCurrentSlot());
         status.setCurrentSlot(slot);
 
         status.setDeposit(status.getDeposit() - bet);
