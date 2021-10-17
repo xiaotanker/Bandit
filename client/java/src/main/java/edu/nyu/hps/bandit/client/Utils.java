@@ -11,6 +11,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 
 public class Utils {
+    static CloseableHttpClient  httpClient = HttpClients.createDefault();
     private static String base ="http://localhost:8080";
     public static String sendPost(String url) throws IOException {
 
@@ -18,7 +19,7 @@ public class Utils {
         HttpPost post = new HttpPost(base + url);
 
 
-        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+        try (
              CloseableHttpResponse response = httpClient.execute(post)){
 
             result = EntityUtils.toString(response.getEntity());

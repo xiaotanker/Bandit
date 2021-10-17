@@ -161,11 +161,12 @@ public class BanditController {
         if(status.getDeposit()<=0){
             logger.info("deposit is now 0, game over");
             status.setStart(false);
+            status.setGameOver(true);
         }
         if(status.getCurrentRound()>status.getTotalSlot() * 100){
             logger.info("all rounds finished, game over");
             status.setStart(false);
-
+            status.setGameOver(true);
         }
         return ResponseEntity.status(200).body(new GamblerStatus(status));
     }

@@ -27,6 +27,7 @@ public class CasinoStatus {
         this.winningSlot = status.getWinningSlot();
         this.normalSlotRate = status.getNormalSlotRate();
         this.winningSlotRate = status.getWinningSlotRate();
+        this.currentRound = status.getCurrentRound();
     }
     public boolean isGameOver() {
         return gameOver;
