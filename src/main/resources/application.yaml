@@ -1,0 +1,6 @@
+bandit:
+  totalSlot: 50
+  switchLeft: 10
+  deposit: 1000
+  normalSlotRate: 47
+  winningSlotRate: 60
