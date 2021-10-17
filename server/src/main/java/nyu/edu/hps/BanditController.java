@@ -77,15 +77,19 @@ public class BanditController {
     @PostMapping("/casino/sendMove")
     public ResponseEntity<GameStatus> casinoSendMove(@RequestParam(value = "pwd") String pwd, @RequestParam(value = "winningSlot") int winningSlot) {
         if (!status.isStart()) {
+            logger.error("wrongly send move by casino, game is not started yet ");
             return ResponseEntity.status(403).body(null);
         }
         if (!pwd.equals(pwdCasino)) {
+            logger.error("wrongly send move by casino, wrong pwd ");
             return ResponseEntity.status(401).body(null);
         }
         if (!status.isCasinoTurn()) {
+            logger.error("wrongly send move by casino, not casino's turn ");
             return ResponseEntity.status(401).body(null);
         }
         if (winningSlot > status.getTotalSlot()) {
+            logger.error("wrongly send move by casino, invalid slot#, max# is:"+status.getTotalSlot()+", received slot# is:"+winningSlot);
             return ResponseEntity.status(403).body(null);
         }
 
@@ -99,7 +103,8 @@ public class BanditController {
                     status.setSwitchLeft(status.getSwitchLeft() - 1);
                     logger.info("winning slot is now slot #"+winningSlot);
                 } else {
-                    return ResponseEntity.status(403).body(null);
+                    logger.error("wrongly send move by casino, run out of switch times");
+                    return ResponseEntity.status(403).body(status);
                 }
             }
         }
@@ -111,18 +116,23 @@ public class BanditController {
     @PostMapping("/gambler/sendMove")
     public ResponseEntity<GamblerStatus> gamblerSendMove(@RequestParam(value = "pwd") String pwd, @RequestParam(value = "slot") int slot, @RequestParam(value = "bet") int bet) {
         if (!status.isStart()) {
+            logger.error("wrongly send move by gambler, game is not started yet");
             return ResponseEntity.status(403).body(null);
         }
         if (!pwd.equals(pwdGambler)) {
+            logger.error("wrongly send move by gambler, wrong pwd");
             return ResponseEntity.status(401).body(null);
         }
         if (status.isCasinoTurn()) {
+            logger.error("wrongly send move by gambler, not gambler's turn");
             return ResponseEntity.status(401).body(null);
         }
         if (slot > status.getTotalSlot() ) {
+            logger.error("wrongly send move by gambler, slot # is not valid");
             return ResponseEntity.status(403).body(null);
         }
         if (bet < 1 || bet > 3){//must bet 1 to 3
+            logger.error("wrongly send move by gambler, bet price is not valid");
             return ResponseEntity.status(403).body(null);
         }
         logger.info("gambler chooses slot # "+ slot + "and bets "+ bet+" dollar(s)");

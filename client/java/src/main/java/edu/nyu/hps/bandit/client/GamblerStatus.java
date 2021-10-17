@@ -1,6 +1,4 @@
-package nyu.edu.hps;
-
-import org.springframework.beans.factory.annotation.Value;
+package edu.nyu.hps.bandit.client;
 
 public class GamblerStatus {
     private boolean gameOver;
@@ -9,7 +7,7 @@ public class GamblerStatus {
     private int deposit;
     private int currentSlot;
     private int currentRound;
-    private int totalSlot;
+    private int totalSlot;//s
     private int switchLeft;//k
 
     public boolean isGameOver() {
@@ -76,14 +74,14 @@ public class GamblerStatus {
         this.switchLeft = switchLeft;
     }
 
-    public GamblerStatus(GameStatus status){
-        this.gameOver = status.isGameOver();
-        this.currentRound = status.getCurrentRound();
-        this.currentSlot = status.getCurrentSlot();
-        this.deposit= status.getDeposit();
-        this.gamblerTurn = !status.isCasinoTurn();
-        this.start = status.isStart();
-        this.switchLeft = status.getSwitchLeft();
-        this.totalSlot = status.getTotalSlot();
+    public GamblerStatus(boolean gameOver, boolean start, boolean gamblerTurn, int deposit, int currentSlot, int currentRound, int totalSlot, int switchLeft) {
+        this.gameOver = gameOver;
+        this.start = start;
+        this.gamblerTurn = gamblerTurn;
+        this.deposit = deposit;
+        this.currentSlot = currentSlot;
+        this.currentRound = currentRound;
+        this.totalSlot = totalSlot;
+        this.switchLeft = switchLeft;
     }
 }
