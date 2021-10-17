@@ -156,8 +156,6 @@ public class BanditController {
             status.setDeposit(status.getDeposit()+ bet*2);
             logger.info("gambler wins, deposit is now " + status.getDeposit());
         }
-        status.setCurrentRound(status.getCurrentRound() + 1);
-        status.setCasinoTurn(true);
         if(status.getDeposit()<=0){
             logger.info("deposit is now 0, game over");
             status.setStart(false);
@@ -168,6 +166,8 @@ public class BanditController {
             status.setStart(false);
             status.setGameOver(true);
         }
+        status.setCurrentRound(status.getCurrentRound() + 1);
+        status.setCasinoTurn(true);
         return ResponseEntity.status(200).body(new GamblerStatus(status));
     }
 }
