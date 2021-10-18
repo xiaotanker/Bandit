@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
@@ -16,6 +17,11 @@ public class BanditController {
     private String pwdGambler = null;
     private String pwdCasino = null;
     private Random rand = new Random();
+    private Date casinoStartTime;
+    private Date gamblerStartTime;
+    private final long timeLimits = 1000*150;// 2.5min to make up the network cost
+    private long casinoTime=0;
+    private long gamblerTime=0;
 
     @Autowired
     private GameStatus status;
@@ -36,6 +42,7 @@ public class BanditController {
             logger.info("game start, waiting for casino send move");
             status.setCasinoTurn(true);
             status.setStart(true);
+            casinoStartTime = new Date();
         }
         return ResponseEntity.status(200).body(pwdCasino);
     }
@@ -54,6 +61,7 @@ public class BanditController {
             logger.info("game start, waiting for casino send move");
             status.setCasinoTurn(true);
             status.setStart(true);
+            casinoStartTime = new Date();
         }
         return ResponseEntity.status(200).body(pwdGambler);
     }
@@ -95,6 +103,14 @@ public class BanditController {
             return ResponseEntity.status(403).body(null);
         }
 
+        casinoTime += new Date().getTime() - casinoStartTime.getTime();
+        logger.info("casino has used "+ casinoTime +" ms");
+        if(casinoTime > timeLimits){
+            logger.info("casino exceeds time limit, game over");
+            status.setGameOver(true);
+            return ResponseEntity.status(200).body(new CasinoStatus(status));
+        }
+
         if (status.getCurrentRound() == 1) {
             logger.info("winning slot is now slot #"+winningSlot);
             status.setWinningSlot(winningSlot);
@@ -111,6 +127,7 @@ public class BanditController {
             }
         }
         status.setCasinoTurn(false);
+        gamblerStartTime = new Date();
         logger.info("waiting for gambler to send move");
         return ResponseEntity.status(200).body(new CasinoStatus(status));
     }
@@ -137,7 +154,16 @@ public class BanditController {
             logger.error("wrongly send move by gambler, bet price is not valid");
             return ResponseEntity.status(403).body(null);
         }
-        logger.info("gambler chooses slot # "+ slot + "and bets "+ bet+" dollar(s)");
+
+        gamblerTime += new Date().getTime() - gamblerStartTime.getTime();
+        logger.info("gambler has used "+ gamblerTime +" ms");
+        if(casinoTime > timeLimits){
+            logger.info("gambler exceeds time limit, game over");
+            status.setGameOver(true);
+            return ResponseEntity.status(200).body(new GamblerStatus(status));
+        }
+
+        logger.info("gambler chooses slot #"+ slot + "and bets "+ bet+" dollar(s)");
         status.setChangedSlot(slot == status.getCurrentSlot());
         status.setCurrentSlot(slot);
 
@@ -168,6 +194,7 @@ public class BanditController {
         }
         status.setCurrentRound(status.getCurrentRound() + 1);
         status.setCasinoTurn(true);
+        casinoStartTime = new Date();
         return ResponseEntity.status(200).body(new GamblerStatus(status));
     }
 }
