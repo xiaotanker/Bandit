@@ -1,4 +1,4 @@
-package nyu.edu.hps;
+package edu.nyu.hps;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;

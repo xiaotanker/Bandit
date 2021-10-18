@@ -1,4 +1,4 @@
-package nyu.edu.hps;
+package edu.nyu.hps;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package nyu.edu.hps;
+package edu.nyu.hps;
 
 public class GamblerStatus {
     private boolean gameOver;
