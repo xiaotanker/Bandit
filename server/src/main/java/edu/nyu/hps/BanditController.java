@@ -19,7 +19,7 @@ public class BanditController {
     private Random rand = new Random();
     private Date casinoStartTime;
     private Date gamblerStartTime;
-    private final long timeLimits = 1000*150;// 2.5min to make up the network cost
+    private final long timeLimits = 1000*180;// 3min to make up the network cost
     private long casinoTime=0;
     private long gamblerTime=0;
 
@@ -124,6 +124,7 @@ public class BanditController {
                     logger.info("winning slot is now slot #"+winningSlot);
                 } else {
                     logger.error("wrongly send move by casino, run out of switch times");
+                    casinoStartTime = new Date();
                     return ResponseEntity.status(403).body(new CasinoStatus(status));
                 }
             }
@@ -169,7 +170,7 @@ public class BanditController {
         status.setChangedSlot(slot == status.getCurrentSlot());
         status.setCurrentSlot(slot);
 
-        status.setDeposit(status.getDeposit() - bet);
+        status.setDeposit(status.getDeposit() - bet);//pay the bet
 
         int dice = rand.nextInt() % 100;
         dice = dice < 0? dice + 100 : dice;
@@ -182,7 +183,10 @@ public class BanditController {
         }
         if(win){
             status.setDeposit(status.getDeposit()+ bet*2);
-            logger.info("gambler wins, deposit is now " + status.getDeposit());
+            logger.info("gambler wins round #"+status.getCurrentRound()+", deposit is now " + status.getDeposit());
+        }
+        else{
+            logger.info("gambler looses round #"+status.getCurrentRound()+", deposit is now " + status.getDeposit());
         }
         if(status.getDeposit()<=0){
             logger.info("deposit is now 0, game over");
