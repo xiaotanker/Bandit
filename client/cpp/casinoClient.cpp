@@ -50,7 +50,8 @@ int main() {
     while(!isStart){
         getStatus();
     }
-    
+    //TODO: send the 1st winning slot
+    sendMove((currentRound - 1) % 100 + 1);
     while(!gameOver){
         if(casinoTurn){
             //TODO: change the strategy
