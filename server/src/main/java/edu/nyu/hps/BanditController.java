@@ -29,6 +29,14 @@ public class BanditController {
 
     Logger logger = LoggerFactory.getLogger(BanditController.class);
 
+    private void setGame(){
+        logger.info("game start, waiting for casino send move");
+        status.setCasinoTurn(true);
+        status.setStart(true);
+        status.setDeposit(status.getTotalSlot()*100);
+        casinoStartTime = new Date();
+    }
+
     @PostMapping("/casino/join")
     public ResponseEntity<String> joinCasino(@RequestParam(value = "name", defaultValue = "casino") String name) {
         if (casino == null) {
@@ -39,10 +47,7 @@ public class BanditController {
         }
         logger.info("casino joined, name: "+ name);
         if (casino != null && gambler != null) {
-            logger.info("game start, waiting for casino send move");
-            status.setCasinoTurn(true);
-            status.setStart(true);
-            casinoStartTime = new Date();
+            setGame();
         }
         return ResponseEntity.status(200).body(pwdCasino);
     }
@@ -58,10 +63,7 @@ public class BanditController {
         logger.info("gambler joined, name: "+ name);
 
         if (casino != null && gambler != null) {
-            logger.info("game start, waiting for casino send move");
-            status.setCasinoTurn(true);
-            status.setStart(true);
-            casinoStartTime = new Date();
+            setGame();
         }
         return ResponseEntity.status(200).body(pwdGambler);
     }
