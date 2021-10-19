@@ -54,7 +54,7 @@ this will start a server at localhost and port 8080
   "gameOver":false,
   "start":true,
   "casinoTurn":true,
-  "deposit":0,
+  "deposit":2000,
   "currentRound":1,
   "totalSlot":20,
   "switchLeft":10,
@@ -75,9 +75,9 @@ this will start a server at localhost and port 8080
 ```json
 {
   "gameOver":false,
-  "start":false,
+  "start":true,
   "gamblerTurn":false,
-  "deposit":0,
+  "deposit":2000,
   "currentSlot":0,
   "currentRound":1,
   "totalSlot":20,
