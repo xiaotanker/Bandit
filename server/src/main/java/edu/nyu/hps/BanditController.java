@@ -193,12 +193,13 @@ public class BanditController {
             status.setStart(false);
             status.setGameOver(true);
         }
+
+        status.setCurrentRound(status.getCurrentRound() + 1);
         if(status.getCurrentRound()>status.getTotalSlot() * 100){
             logger.info("all rounds finished, game over");
             status.setStart(false);
             status.setGameOver(true);
         }
-        status.setCurrentRound(status.getCurrentRound() + 1);
         status.setCasinoTurn(true);
         casinoStartTime = new Date();
         return ResponseEntity.status(200).body(new GamblerStatus(status));
