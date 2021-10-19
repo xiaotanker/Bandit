@@ -10,7 +10,7 @@ When C switches, P is not told even that a switch has happened.
 If P's wealth ever reaches 0 or if the 100*s pulls are done, the game stops.
 
 ## build and start the server
-require java version 11 later, maven version 3 or later
+require java version 11 later, maven 3
 ```bash
   git clone http://github.com/xiaotanker/Bandit.git
   cd server
