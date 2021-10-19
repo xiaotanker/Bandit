@@ -5,6 +5,10 @@ This game involves a player P and a casino C. The casino C offers s slots (where
 
 P begins with 100*s tokens. Before each pull, P choose a slot and bets from one to three tokens. If P wins, then P's wealth increases by that same number of tokens. If P loses, then P's wealth decreases by that same number of tokens. C is told what P's wealth is after each roll.
 
+When C switches, P is not told even that a switch has happened.
+
+If P's wealth ever reaches 0 or if the 100*s pulls are done, the game stops.
+
 ## build and start the server
 require java version 11 later, maven version 3 or later
 ```bash
