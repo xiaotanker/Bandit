@@ -22,16 +22,18 @@ this will start a server at localhost and port 8080
 ## REST apis for clients to play the game
 
 ### joining the game
-|request type:     | POST                          |
+|                  |                               |
 |------------------|-------------------------------|
+|request type:     | POST                          |
 |path:             |  /casino/join?name={name}     |
 |description:      |  joinning the game as the casino with name {name}|
 |response status:  |  200 on success               |
 |response contents:|  pwd a string for authentication|
 
 
-|request type:     | POST                          |
+|                  |                               |
 |------------------|-------------------------------|
+|request type:     | POST                          |
 |path:             |  /gambler/join?name={name}     |
 |description:      |  joinning the game as the gambler(player) with name {name}|
 |response status:  |  200 on success               |
@@ -40,8 +42,9 @@ this will start a server at localhost and port 8080
 ### geting the status
 
 
-|request type:     | GET                          |
+|                  |                               |
 |------------------|-------------------------------|
+|request type:     | GET                          |
 |path:             |  /casino/status?pwd={pwd}     |
 |description:      |  get the current status for casino|
 |response status:  |  200 on success               |
@@ -62,8 +65,9 @@ this will start a server at localhost and port 8080
 }
 ```
 
-|request type:     | GET                          |
+|                  |                               |
 |------------------|-------------------------------|
+|request type:     | GET                          |
 |path:             |  /gambler/status?pwd={pwd}     |
 |description:      |  get the current status for gambler(player)|
 |response status:  |  200 on success               |
@@ -84,15 +88,18 @@ this will start a server at localhost and port 8080
 
 ### sending the  move 
 
-|request type:     | POST                          |
+|                  |                               |
 |------------------|-------------------------------|
+|request type:     | POST                          |
 |path:             |  /casino/sendMove?pwd={pwd}&winningSlot={winningSlot}     |
 |description:      |  set current winning slot to {winningSlot}|
 |response status:  |  200 on success               |
 |response contents:|  current status, json string, same as get status|
 
-|request type:     | POST                          |
+
+|                  |                               |
 |------------------|-------------------------------|
+|request type:     | POST                          |
 |path:             |  /gambler/sendMove?pwd={pwd}&slot={slot}&bet={bet}     |
 |description:      |  gambler go to slot {slot} and bets for {bet}|
 |response status:  |  200 on success               |
