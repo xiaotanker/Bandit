@@ -28,13 +28,11 @@ if __name__ == '__main__':
     pwd = sendPost("/casino/join?name="+name)
 
     status = getStatus(pwd)
-    print(status)
     while not status["start"]:
         status = getStatus(pwd)
 
     #TODO: set the firstWiningSlot
-    stats = sendMove(pwd, 1)
-
+    status = sendMove(pwd, 1)
     while not status["gameOver"]:
         if status["casinoTurn"]:
             #TODO: set winnigSlot

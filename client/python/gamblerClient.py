@@ -28,7 +28,7 @@ def sendMove(pwd, slot, bet):
 if __name__ == '__main__':
     pwd = sendPost("/gambler/join?name=" + name)
     status = getStatus(pwd)
-    print(status)
+
     while not status["start"]:
         status = getStatus(pwd)
 
