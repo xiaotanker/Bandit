@@ -15,7 +15,7 @@ require java version 11 later, maven version 3 or later
 ```
 --bandit.totalSlot stands for s, and --bandit.switchLeft stands for k
 this will start a server at localhost and port 8080
-## rest apis for clients to play the game
+## REST apis for clients to play the game
 
 ### joining the game
 |request type:     | POST                          |
