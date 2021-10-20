@@ -8,7 +8,7 @@ public class CasinoStatus {
     private int currentRound;
 
     private int totalSlot;//s
-
+    private int maxSwitch;
     private int switchLeft;//k
 
     private boolean changedSlot;
@@ -16,6 +16,7 @@ public class CasinoStatus {
 
     private int normalSlotRate;
     private int winningSlotRate;
+
     public CasinoStatus(GameStatus status){
         this.gameOver = status.isGameOver();
         this.start = status.isStart();
@@ -28,7 +29,17 @@ public class CasinoStatus {
         this.normalSlotRate = status.getNormalSlotRate();
         this.winningSlotRate = status.getWinningSlotRate();
         this.currentRound = status.getCurrentRound();
+        this.maxSwitch = status.getMaxSwitch();
     }
+
+    public int getMaxSwitch() {
+        return maxSwitch;
+    }
+
+    public void setMaxSwitch(int maxSwitch) {
+        this.maxSwitch = maxSwitch;
+    }
+
     public boolean isGameOver() {
         return gameOver;
     }

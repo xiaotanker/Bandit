@@ -16,14 +16,22 @@ public class GameStatus {
     private int currentRound = 1;
 
     private int totalSlot;//s
-
-    private int switchLeft;//k
+    private int maxSwitch;//k
+    private int switchLeft;
 
     private int currentSlot;
     private int winningSlot;
     private boolean changedSlot;
     private int normalSlotRate;
     private int winningSlotRate;
+
+    public int getMaxSwitch() {
+        return maxSwitch;
+    }
+
+    public void setMaxSwitch(int maxSwitch) {
+        this.maxSwitch = maxSwitch;
+    }
 
     public boolean isChangedSlot() {
         return changedSlot;

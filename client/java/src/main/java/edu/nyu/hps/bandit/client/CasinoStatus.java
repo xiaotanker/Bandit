@@ -8,7 +8,7 @@ public class CasinoStatus {
     private int currentRound;
 
     private int totalSlot;//s
-
+    private int maxSwitch;//k
     private int switchLeft;//k
 
     private boolean changedSlot;
@@ -17,18 +17,27 @@ public class CasinoStatus {
     private int normalSlotRate;
     private int winningSlotRate;
 
-    public CasinoStatus(boolean gameOver, boolean start, boolean casinoTurn, int deposit, int currentRound, int totalSlot, int switchLeft, boolean changedSlot, int winningSlot, int normalSlotRate, int winningSlotRate) {
+    public CasinoStatus(boolean gameOver, boolean start, boolean casinoTurn, int deposit, int currentRound, int totalSlot, int maxSwitch, int switchLeft, boolean changedSlot, int winningSlot, int normalSlotRate, int winningSlotRate) {
         this.gameOver = gameOver;
         this.start = start;
         this.casinoTurn = casinoTurn;
         this.deposit = deposit;
         this.currentRound = currentRound;
         this.totalSlot = totalSlot;
+        this.maxSwitch = maxSwitch;
         this.switchLeft = switchLeft;
         this.changedSlot = changedSlot;
         this.winningSlot = winningSlot;
         this.normalSlotRate = normalSlotRate;
         this.winningSlotRate = winningSlotRate;
+    }
+
+    public int getMaxSwitch() {
+        return maxSwitch;
+    }
+
+    public void setMaxSwitch(int maxSwitch) {
+        this.maxSwitch = maxSwitch;
     }
 
     public boolean isChangedSlot() {

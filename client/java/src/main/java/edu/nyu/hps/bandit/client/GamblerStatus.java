@@ -6,22 +6,32 @@ public class GamblerStatus {
     private boolean gamblerTurn;
     private int deposit;
     private int currentSlot;
+    private int maxSwitch;
     private int currentRound;
     private int totalSlot;//s
 
     private int normalSlotRate;
     private int winningSlotRate;
 
-    public GamblerStatus(boolean gameOver, boolean start, boolean gamblerTurn, int deposit, int currentSlot, int currentRound, int totalSlot, int normalSlotRate, int winningSlotRate) {
+    public GamblerStatus(boolean gameOver, boolean start, boolean gamblerTurn, int deposit, int currentSlot, int maxSwitch, int currentRound, int totalSlot, int normalSlotRate, int winningSlotRate) {
         this.gameOver = gameOver;
         this.start = start;
         this.gamblerTurn = gamblerTurn;
         this.deposit = deposit;
         this.currentSlot = currentSlot;
+        this.maxSwitch = maxSwitch;
         this.currentRound = currentRound;
         this.totalSlot = totalSlot;
         this.normalSlotRate = normalSlotRate;
         this.winningSlotRate = winningSlotRate;
+    }
+
+    public int getMaxSwitch() {
+        return maxSwitch;
+    }
+
+    public void setMaxSwitch(int maxSwitch) {
+        this.maxSwitch = maxSwitch;
     }
 
     public int getNormalSlotRate() {

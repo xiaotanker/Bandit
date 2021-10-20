@@ -33,6 +33,7 @@ public class BanditController {
         logger.info("game start, waiting for casino send move");
         status.setCasinoTurn(true);
         status.setStart(true);
+        status.setSwitchLeft(status.getMaxSwitch());
         status.setDeposit(status.getTotalSlot()*100);
         casinoStartTime = new Date();
     }

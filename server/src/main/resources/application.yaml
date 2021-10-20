@@ -1,5 +1,5 @@
  bandit:
-  totalSlot: 50
-  switchLeft: 10
+  totalSlot: 20
+  maxSwitch: 8
   normalSlotRate: 47
   winningSlotRate: 60

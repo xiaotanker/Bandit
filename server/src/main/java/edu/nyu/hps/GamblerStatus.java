@@ -8,9 +8,17 @@ public class GamblerStatus {
     private int currentSlot;
     private int currentRound;
     private int totalSlot;//s
-
+    private int maxSwitch;//k
     private int normalSlotRate;
     private int winningSlotRate;
+
+    public int getMaxSwitch() {
+        return maxSwitch;
+    }
+
+    public void setMaxSwitch(int maxSwitch) {
+        this.maxSwitch = maxSwitch;
+    }
 
     public int getNormalSlotRate() {
         return normalSlotRate;
@@ -95,5 +103,6 @@ public class GamblerStatus {
         this.totalSlot = status.getTotalSlot();
         this.normalSlotRate = status.getNormalSlotRate();
         this.winningSlotRate = status.getWinningSlotRate();
+        this.maxSwitch = status.getMaxSwitch();
     }
 }
