@@ -108,3 +108,6 @@ this will start a server at localhost and port 8080
 |description:      |  gambler go to slot {slot} and bets for {bet}|
 |response status:  |  200 on success               |
 |response contents:|  current status, json string, same as get status|
+
+## contact us
+feel free to contact us via email tj2099@nyu.edu
