@@ -50,19 +50,21 @@ this will start a server at localhost and port 8080
 |response status:  |  200 on success               |
 |response contents:| current status, json string, example displayed down here|
 ```json
-{
+{ 
   "gameOver":false,
   "start":true,
-  "casinoTurn":true,
-  "deposit":2000,
-  "currentRound":1,
+  "casinoTurn":false,
+  "deposit":1730,
+  "currentRound":1999,
   "totalSlot":20,
-  "switchLeft":10,
+  "maxSwitch":8,
+  "switchLeft":0,
   "changedSlot":false,
-  "winningSlot":0,
+  "winningSlot":9,
   "normalSlotRate":47,
   "winningSlotRate":60
 }
+
 ```
 
 |                  |                               |
@@ -76,14 +78,16 @@ this will start a server at localhost and port 8080
 {
   "gameOver":false,
   "start":true,
-  "gamblerTurn":false,
-  "deposit":2000,
-  "currentSlot":0,
-  "currentRound":1,
+  "gamblerTurn":true,
+  "deposit":1730,
+  "currentSlot":10,
+  "currentRound":1999,
   "totalSlot":20,
+  "maxSwitch":8,
   "normalSlotRate":47,
   "winningSlotRate":60
 }
+
 ```
 
 ### sending the  move 
