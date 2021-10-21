@@ -110,4 +110,4 @@ this will start a server at localhost and port 8080
 |response contents:|  current status, json string, same as get status|
 
 ## contact us
-feel free to contact us via email tj2099@nyu.edu
+feel free to contact us via email tj2099@nyu.edu & cz2139@nyu.edu
