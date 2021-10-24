@@ -9,6 +9,12 @@ When C switches, P is not told even that a switch has happened.
 
 If P's wealth ever reaches 0 or if the 100*s pulls are done, the game stops.
 
+### game description update at 10/23
+
+The player may stop playing at any time before 100* s pulls and keep the tokens P still has at that time.
+
+player(gambler) may stop playing by sendMove with {bet} = 0.
+
 ## build and start the server
 require java version 11 later, maven 3
 ```bash
@@ -105,7 +111,7 @@ this will start a server at localhost and port 8080
 |------------------|-------------------------------|
 |request type:     | POST                          |
 |path:             |  /gambler/sendMove?pwd={pwd}&slot={slot}&bet={bet}     |
-|description:      |  gambler go to slot {slot} and bets for {bet}|
+|description:      |  gambler go to slot {slot} and bets for {bet}, stop playing the game by setting {bet}=0|
 |response status:  |  200 on success               |
 |response contents:|  current status, json string, same as get status|
 
