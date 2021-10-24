@@ -179,7 +179,7 @@ public class BanditController {
         }
 
         logger.info("gambler chooses slot #"+ slot + "and bets "+ bet+" dollar(s)");
-        status.setChangedSlot(slot == status.getCurrentSlot());
+        status.setChangedSlot(slot != status.getCurrentSlot());
         status.setCurrentSlot(slot);
 
         status.setDeposit(status.getDeposit() - bet);//pay the bet
