@@ -21,9 +21,9 @@ require java version 11 later, maven 3
   git clone http://github.com/xiaotanker/Bandit.git
   cd server
   mvn clean package
-  java -jar ./target/bandit-server-1.0-SNAPSHOT.jar --bandit.totalSlot=20 --bandit.totalSwitch=8
+  java -jar ./target/bandit-server-1.0-SNAPSHOT.jar --bandit.totalSlot=20 --bandit.maxSwitch=8
 ```
---bandit.totalSlot stands for s, and --bandit.totalSwitch stands for k
+--bandit.totalSlot stands for s, and --bandit.maxSwitch stands for k
 this will start a server at localhost and port 8080
 ## REST apis for clients to play the game
 
