@@ -135,7 +135,9 @@ public class BanditController {
         logger.info("waiting for gambler to send move");
         return ResponseEntity.status(200).body(new CasinoStatus(status));
     }
-
+    //gambler send move
+    //play on slot #{slot} and bet for {bet} dollars
+    //stop the game if bet == 0
     @PostMapping("/gambler/sendMove")
     public ResponseEntity<GamblerStatus> gamblerSendMove(@RequestParam(value = "pwd") String pwd, @RequestParam(value = "slot") int slot, @RequestParam(value = "bet") int bet) {
         if (!status.isStart()) {
@@ -154,7 +156,7 @@ public class BanditController {
             logger.error("wrongly send move by gambler, slot # is not valid");
             return ResponseEntity.status(403).body(null);
         }
-        if (bet < 1 || bet > 3){//must bet 1 to 3
+        if (bet < 0 || bet > 3){//must bet 1 to 3
             logger.error("wrongly send move by gambler, bet price is not valid");
             return ResponseEntity.status(403).body(null);
         }
@@ -163,6 +165,13 @@ public class BanditController {
         logger.info("gambler has used "+ gamblerTime +" ms");
         if(casinoTime > timeLimits){
             logger.info("gambler exceeds time limit, game over");
+            status.setGameOver(true);
+            return ResponseEntity.status(200).body(new GamblerStatus(status));
+        }
+
+        if(bet == 0){
+            logger.info("gambler stops playing the game, his deposit is "+ status.getDeposit());
+            status.setCasinoTurn(true);
             status.setGameOver(true);
             return ResponseEntity.status(200).body(new GamblerStatus(status));
         }
