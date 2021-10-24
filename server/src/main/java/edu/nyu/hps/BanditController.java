@@ -166,6 +166,7 @@ public class BanditController {
         if(casinoTime > timeLimits){
             logger.info("gambler exceeds time limit, game over");
             status.setGameOver(true);
+            status.setStart(false);
             return ResponseEntity.status(200).body(new GamblerStatus(status));
         }
 
@@ -173,6 +174,7 @@ public class BanditController {
             logger.info("gambler stops playing the game, his deposit is "+ status.getDeposit());
             status.setCasinoTurn(true);
             status.setGameOver(true);
+            status.setStart(false);
             return ResponseEntity.status(200).body(new GamblerStatus(status));
         }
 
