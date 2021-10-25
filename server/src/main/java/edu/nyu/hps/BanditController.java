@@ -163,7 +163,7 @@ public class BanditController {
 
         gamblerTime += new Date().getTime() - gamblerStartTime.getTime();
         logger.info("gambler has used "+ gamblerTime +" ms");
-        if(casinoTime > timeLimits){
+        if(gamblerTime > timeLimits){
             logger.info("gambler exceeds time limit, game over");
             status.setGameOver(true);
             status.setStart(false);
