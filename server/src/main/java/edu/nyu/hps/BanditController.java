@@ -101,7 +101,7 @@ public class BanditController {
             logger.error("wrongly send move by casino, not casino's turn ");
             return ResponseEntity.status(401).body(null);
         }
-        if (winningSlot > status.getTotalSlot()) {
+        if (winningSlot > status.getTotalSlot() || winningSlot < 1) {
             logger.error("wrongly send move by casino, invalid slot#, max# is:"+status.getTotalSlot()+", received slot# is:"+winningSlot);
             return ResponseEntity.status(403).body(null);
         }
